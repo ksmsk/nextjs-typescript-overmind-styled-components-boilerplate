@@ -1,5 +1,5 @@
 import { Action, rehydrate } from "overmind";
-import { Pages } from "./state";
+import { Pages, Themes } from "./state";
 
 export const changePage: Action<any> = ({ state }, mutations: any) => {
   rehydrate(state, mutations || []);
@@ -11,4 +11,9 @@ export const changePage: Action<any> = ({ state }, mutations: any) => {
     default:
       break;
   }
+};
+
+export const toggleTheme: Action<void> = ({ state }) => {
+  state.theme =
+    state.theme === Themes.primary ? Themes.secondary : Themes.primary;
 };

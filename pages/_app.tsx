@@ -8,11 +8,14 @@ import {
 } from "overmind";
 import { Provider } from "overmind-react";
 import { storeConfig } from "../store";
-import { CacheProvider } from "@emotion/react";
+import { CacheProvider, ThemeProvider } from "@emotion/react";
 import { cache } from "@emotion/css";
+import { primaryTheme, secondaryTheme } from "../styles/theme";
+import { Themes } from "../store/base/state";
 
 class MyApp extends App {
   private readonly overmind: Overmind<typeof storeConfig>;
+  private disposeReaction: any;
 
   constructor(props: any) {
     super(props);
@@ -28,6 +31,17 @@ class MyApp extends App {
     }
   }
 
+  componentDidMount() {
+    this.disposeReaction = this.overmind.reaction(
+      (state) => state.theme,
+      () => this.forceUpdate()
+    );
+  }
+
+  componentWillUnmount() {
+    this.disposeReaction();
+  }
+
   componentDidUpdate() {
     this.overmind.actions.changePage(this.props.pageProps.mutations || []);
   }
@@ -39,7 +53,15 @@ class MyApp extends App {
     return (
       <Provider value={this.overmind}>
         <CacheProvider value={cache}>
-          <Component {...props} />
+          <ThemeProvider
+            theme={
+              this.overmind.state.theme === Themes.primary
+                ? primaryTheme
+                : secondaryTheme
+            }
+          >
+            <Component {...props} />
+          </ThemeProvider>
         </CacheProvider>
       </Provider>
     );

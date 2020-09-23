@@ -9,10 +9,14 @@ type Props = {
 
 const StyledHeader = styled.h1<Props>`
   color: ${({ titleColor }) => titleColor};
+  background-color: ${({ theme }) => theme.backgroundColor};
 `;
 
 export const Header: FC<Props> = ({ titleColor }) => {
-  const { state } = useOvermind();
+  const {
+    state,
+    actions: { toggleTheme },
+  } = useOvermind();
 
   return (
     <div>
@@ -23,6 +27,7 @@ export const Header: FC<Props> = ({ titleColor }) => {
       <Link href={"/about"}>
         <a>About Page</a>
       </Link>
+      <button onClick={toggleTheme}>Change Theme</button>
     </div>
   );
 };
