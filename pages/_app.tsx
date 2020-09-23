@@ -7,10 +7,12 @@ import {
   Overmind,
 } from "overmind";
 import { Provider } from "overmind-react";
-import { config } from "../store";
+import { storeConfig } from "../store";
+import { CacheProvider } from "@emotion/react";
+import { cache } from "@emotion/css";
 
 class MyApp extends App {
-  private readonly overmind: Overmind<typeof config>;
+  private readonly overmind: Overmind<typeof storeConfig>;
 
   constructor(props: any) {
     super(props);
@@ -18,10 +20,10 @@ class MyApp extends App {
     const mutations = props.pageProps.mutations || [];
 
     if (typeof window !== "undefined") {
-      this.overmind = createOvermind(config);
+      this.overmind = createOvermind(storeConfig);
       this.overmind.actions.changePage(mutations);
     } else {
-      this.overmind = createOvermindSSR(config);
+      this.overmind = createOvermindSSR(storeConfig);
       rehydrate(this.overmind.state, mutations);
     }
   }
@@ -36,7 +38,9 @@ class MyApp extends App {
 
     return (
       <Provider value={this.overmind}>
-        <Component {...props} />
+        <CacheProvider value={cache}>
+          <Component {...props} />
+        </CacheProvider>
       </Provider>
     );
   }

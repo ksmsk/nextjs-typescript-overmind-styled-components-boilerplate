@@ -1,18 +1,22 @@
 import Link from "next/link";
-import React from "react";
-import styled from "styled-components";
+import React, { FC } from "react";
+import styled from "@emotion/styled";
 import { useOvermind } from "../store";
 
-const StyledHeader = styled.h1<{ color: String }>`
-  color: ${(props) => props.color};
+type Props = {
+  titleColor: string;
+};
+
+const StyledHeader = styled.h1<Props>`
+  color: ${({ titleColor }) => titleColor};
 `;
 
-export const Header = () => {
+export const Header: FC<Props> = ({ titleColor }) => {
   const { state } = useOvermind();
 
   return (
     <div>
-      <StyledHeader color="red">{state.page}</StyledHeader>
+      <StyledHeader titleColor={titleColor}>{state.page}</StyledHeader>
       <Link href={"/"}>
         <a>Home page</a>
       </Link>
