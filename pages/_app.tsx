@@ -8,10 +8,11 @@ import {
 } from "overmind";
 import { Provider } from "overmind-react";
 import { storeConfig } from "../store";
-import { CacheProvider, ThemeProvider } from "@emotion/react";
+import { CacheProvider, Global, ThemeProvider } from "@emotion/react";
 import { cache } from "@emotion/css";
 import { primaryTheme, secondaryTheme } from "../styles/theme";
 import { Themes } from "../store/base/state";
+import { cssReset } from "../styles/cssReset";
 
 class MyApp extends App {
   private readonly overmind: Overmind<typeof storeConfig>;
@@ -51,19 +52,22 @@ class MyApp extends App {
     const { mutations, ...props } = this.props.pageProps;
 
     return (
-      <Provider value={this.overmind}>
-        <CacheProvider value={cache}>
-          <ThemeProvider
-            theme={
-              this.overmind.state.theme === Themes.primary
-                ? primaryTheme
-                : secondaryTheme
-            }
-          >
-            <Component {...props} />
-          </ThemeProvider>
-        </CacheProvider>
-      </Provider>
+      <>
+        <Global styles={cssReset} />
+        <Provider value={this.overmind}>
+          <CacheProvider value={cache}>
+            <ThemeProvider
+              theme={
+                this.overmind.state.theme === Themes.primary
+                  ? primaryTheme
+                  : secondaryTheme
+              }
+            >
+              <Component {...props} />
+            </ThemeProvider>
+          </CacheProvider>
+        </Provider>
+      </>
     );
   }
 }
