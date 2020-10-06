@@ -1,9 +1,9 @@
 import { GetStaticProps, NextPage } from "next";
 import { createOvermindSSR } from "overmind";
 import React from "react";
-import { storeConfig } from "../store";
-import { Header } from "../components/Header";
-import { Pages } from "../store/base/state";
+import { storeConfig } from "@shared/store";
+import { Header } from "@shared/components/Header";
+import { Pages } from "@shared/store/base/state";
 
 type Props = {};
 

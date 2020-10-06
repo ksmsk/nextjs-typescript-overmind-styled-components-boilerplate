@@ -1,5 +1,10 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@shared/*": ["shared/*"],
+      "@pages/*": ["pages/*"]
+    },
     "target": "esnext",
     "module": "esnext",
     "jsx": "preserve",

@@ -7,12 +7,12 @@ import {
   Overmind,
 } from "overmind";
 import { Provider } from "overmind-react";
-import { storeConfig } from "../store";
+import { storeConfig } from "@shared/store";
 import { CacheProvider, Global, ThemeProvider } from "@emotion/react";
 import { cache } from "@emotion/css";
-import { primaryTheme, secondaryTheme } from "../styles/theme";
-import { Themes } from "../store/base/state";
-import { cssReset } from "../styles/cssReset";
+import { primaryTheme, secondaryTheme } from "@shared/styles/theme";
+import { Themes } from "@shared/store/base/state";
+import { cssReset } from "@shared/styles/cssReset";
 
 class MyApp extends App {
   private readonly overmind: Overmind<typeof storeConfig>;

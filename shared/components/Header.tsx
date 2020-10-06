@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { FC } from "react";
 import styled from "@emotion/styled";
-import { useOvermind } from "../store";
+import { useOvermind } from "@shared/store";
 
 type Props = {
   titleColor: string;
