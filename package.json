@@ -16,7 +16,7 @@
     "@emotion/react": "^11.0.0-next.19",
     "@emotion/server": "^11.0.0-next.19",
     "@emotion/styled": "^11.0.0-next.19",
-    "next": "^9.5.3",
+    "next": "^9.5.4",
     "overmind": "^25.0.2",
     "overmind-react": "^26.0.2",
     "react": "^16.13.1",
